@@ -13,7 +13,7 @@ public class ProductManagerTest {
     ProductManager manager = new ProductManager(repo);
 
     Product product = new Product(11, "eggs", 120);
-    Product book = new Book(12, "Колобок", 50, "Толстой Алексей Николаевич");
+    Product book = new Book(12, "инструкция Galaxy S22 Ultra", 50, "Автор");
     Product smartphone = new Smartphone(13, "Galaxy S22 Ultra", 150000, "SAMSUNG");
 
     @Test
@@ -35,12 +35,12 @@ public class ProductManagerTest {
     }
 
     @Test
-    void shouldSearchBy() {
+    void ShouldSearchedWhenOneProductFits() {
         manager.add(book);
         manager.add(smartphone);
         manager.add(product);
-        String name = "Колобок";
-        Product[] expected = {book};
+        String name = "eggs";
+        Product[] expected = {product};
         Product[] actual = manager.searchBy(name);
         assertArrayEquals(expected, actual);
     }
@@ -51,7 +51,7 @@ public class ProductManagerTest {
         manager.add(smartphone);
         manager.add(product);
         String name = "Galaxy S22 Ultra";
-        Product[] expected = {smartphone};
+        Product[] expected = {book, smartphone};
         Product[] actual = manager.searchBy(name);
         assertArrayEquals(expected, actual);
     }

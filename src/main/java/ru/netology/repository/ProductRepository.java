@@ -15,12 +15,22 @@ public class ProductRepository {
         products = tmp;
     }
 
+    public Product[] getProducts() {
+        return products;
+    }
+
     public void removeById(int id) {
+
+        Product removeProduct = findById(id);
+        if (removeProduct == null) {
+            throw new NotFoundException("Element with id: " + id + " not found");
+        }
+
         Product[] tmp = new Product[products.length - 1];
         int copyToIndex = 0;
-        for (Product item : products) {
-            if (item.getID() != id) {
-                tmp[copyToIndex] = item;
+        for (Product product : products) {
+            if (product.getID() != id) {
+                tmp[copyToIndex] = product;
                 copyToIndex++;
             }
 
@@ -28,7 +38,13 @@ public class ProductRepository {
         products = tmp;
     }
 
-    public Product[] getProducts() {
-        return products;
+
+    public Product findById(int id) {
+        for (Product product : products) {
+            if (product.getID() == id) {
+                return product;
+            }
+        }
+        return null;
     }
 }

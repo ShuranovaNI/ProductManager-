@@ -69,4 +69,17 @@ public class ProductRepositoryTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
+    @Test
+    public void WhenExceptionThrown() {
+
+        repo.save(product);
+        repo.save(book);
+        repo.save(smartphone);
+
+
+        Assertions.assertThrows(NotFoundException.class,
+                () -> repo.removeById(1));
+    }
 }
+
+
